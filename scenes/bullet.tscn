@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://cyypfhm82sxkm"]
+
+[ext_resource type="Texture2D" uid="uid://cxd1aeewhxowh" path="res://assets/bullet.png" id="1_mkf8s"]
+[ext_resource type="Script" uid="uid://bsrwrg53l07bm" path="res://scripts/bullet.gd" id="1_y25gk"]
+[ext_resource type="Script" uid="uid://8aorngkqrhuc" path="res://scripts/trail.gd" id="3_l5glv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y25gk"]
+atlas = ExtResource("1_mkf8s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5glv"]
+atlas = ExtResource("1_mkf8s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoqba"]
+atlas = ExtResource("1_mkf8s")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qncy5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y25gk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5glv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoqba")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tamys"]
+radius = 3.0
+
+[sub_resource type="Curve" id="Curve_eoqba"]
+_data = [Vector2(0, 0.0947368), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_y25gk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_qncy5")
+autoplay = "default"
+frame_progress = 0.641657
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tamys")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -1
+points = PackedVector2Array(0, 0, 19, 10)
+width = 6.0
+width_curve = SubResource("Curve_eoqba")
+default_color = Color(0.996078, 0.960784, 0.835294, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("3_l5glv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(0, -20)
+gravity = Vector2(0, 100)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+color = Color(0.992375, 0.403894, 0, 1)
