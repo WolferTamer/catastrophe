@@ -39,7 +39,9 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.animation = "idleleft"
 	
 	var clicking := Input.is_action_just_pressed("attack")
-	if clicking :
+	if clicking and GlobalManager.bulletheld:
+		GlobalManager.stamina-=10;
+		GlobalManager.bulletheld = false
 		var bullet = BULLET.instantiate()
 		var mousevec = (get_global_mouse_position() - position).normalized()
 		bullet.velocity = mousevec * 500.0

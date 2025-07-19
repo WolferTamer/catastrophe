@@ -38,17 +38,20 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tol8a"]
-radius = 7.0
+radius = 6.0
 
 [node name="Cat" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 script = ExtResource("1_se5fe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cxap7")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tol8a")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
@@ -62,15 +65,3 @@ gravity = Vector2(0, 100)
 initial_velocity_min = 10.0
 initial_velocity_max = 50.0
 color = Color(0.992375, 0.403894, 0, 1)
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_tol8a")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_tol8a")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
