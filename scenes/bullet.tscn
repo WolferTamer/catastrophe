@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyypfhm82sxkm"]
+[gd_scene load_steps=12 format=3 uid="uid://cyypfhm82sxkm"]
 
 [ext_resource type="Texture2D" uid="uid://cxd1aeewhxowh" path="res://assets/bullet.png" id="1_mkf8s"]
 [ext_resource type="Script" uid="uid://bsrwrg53l07bm" path="res://scripts/bullet.gd" id="1_y25gk"]
 [ext_resource type="Script" uid="uid://8aorngkqrhuc" path="res://scripts/trail.gd" id="3_l5glv"]
+[ext_resource type="AudioStream" uid="uid://xp5y42l1nlsk" path="res://assets/reload.wav" id="4_eoqba"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y25gk"]
 atlas = ExtResource("1_mkf8s")
@@ -87,5 +88,8 @@ shape = SubResource("CircleShape2D_tamys")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_l5glv")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_eoqba")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

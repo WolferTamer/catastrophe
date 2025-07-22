@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://1oqqhmp44ocu"]
+
+[ext_resource type="Script" uid="uid://6onbmrm8phbb" path="res://scripts/text_box.gd" id="1_3n4vj"]
+[ext_resource type="FontFile" uid="uid://chh6gk40nnax3" path="res://assets/PIXEL-LI.TTF" id="2_bfpow"]
+
+[sub_resource type="Animation" id="Animation_fyky8"]
+resource_name = "TextPlay"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_led2e"]
+_data = {
+&"TextPlay": SubResource("Animation_fyky8")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vogiq"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x1cjp"]
+font = ExtResource("2_bfpow")
+font_size = 30
+
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3n4vj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_led2e")
+}
+autoplay = "TextPlay"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -218.0
+offset_right = 240.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vogiq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Example text"
+label_settings = SubResource("LabelSettings_x1cjp")
+
+[node name="LetterDisplayTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="LetterDisplayTimer" to="." method="_on_letter_display_timer_timeout"]

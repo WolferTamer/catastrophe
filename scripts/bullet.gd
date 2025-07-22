@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
 @onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var hit = false
 func _physics_process(delta: float) -> void:
